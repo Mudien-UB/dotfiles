@@ -38,7 +38,16 @@ Set-PSReadLineKeyHandler -Chord Shift+Enter -Function InsertLineBelow
 
 # === Fzf ===
 Import-Module PSFzf
-Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
+Set-PsFzfOption -PreviewCommand { param($file) Get-Content $file -Head 20 }
+Set-PsFzfOption `
+    -PSReadlineChordProvider 'Ctrl+t' `
+    -PSReadlineChordReverseHistory 'Ctrl+r' `
+    -OnSelect {
+      param($item)
+      $item = [string]$item
+      $item | Set-Clipboard
+      Write-Host "Copied file path to clipboard: $item"
+    }
 
 # === Alias ===
 function ll { Get-ChildItem | Format-Table Name, Length, LastWriteTime }
@@ -50,3 +59,4 @@ function ... { Set-Location ../.. }
 function grep { param($pattern, $file) Select-String -Pattern $pattern -Path $file }
 function coding { Set-Location "D:\coding" }
 function kuliah { Set-Location "D:\kuliah\" }
+function d { Set-Location "D:\" }
