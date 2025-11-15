@@ -3,7 +3,9 @@
 # 💻 Dotfiles 
 
 > Warning: Don’t blindly use these settings unless you understand what they do.
+
 > These configurations are tailored specifically to my personal workflow.
+
 > Apply everything at your own risk and make sure you know what each part affects.
 
 
@@ -19,6 +21,16 @@
 - [**Oh My Posh**](https://ohmyposh.dev/) - Theme (amro)
 - [**Terminal Icons**](https://github.com/devblackops/Terminal-Icons)  for better visuals
 - [**PSFzf**](https://github.com/kelleyma49/PSFzf) fuzzy finder integration
+
+--- 
+
+## How to use
+
+### Linux/MacOs
+You already know what to do.
+
+## Windows
+There are plenty of friendly tutorials out there — don’t worry, no judgment… we’ve all Googled the obvious stuff before.
 
 ## Notes
 
