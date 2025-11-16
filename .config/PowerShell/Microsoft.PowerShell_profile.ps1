@@ -57,6 +57,6 @@ function rm { param($path) Remove-Item $path -Recurse -Force }
 function .. { Set-Location .. }
 function ... { Set-Location ../.. }
 function grep { param($pattern, $file) Select-String -Pattern $pattern -Path $file }
-function coding { Set-Location "D:\coding" }
-function kuliah { Set-Location "D:\kuliah\" }
+function coding { param($path) Set-Location "D:\coding\$path" }
+function kuliah { param($path) Set-Location "D:\kuliah\$path" }
 function d { Set-Location "D:\" }
