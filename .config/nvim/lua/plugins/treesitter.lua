@@ -13,6 +13,8 @@ return {
         "json",
         "lua",
         "vue",
+        "c",
+        "cpp",
       },
       highlight = { enable = true },
       indent = { enable = true },

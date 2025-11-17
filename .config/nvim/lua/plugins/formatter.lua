@@ -1,4 +1,4 @@
-return {
+local M = {
   {
     "stevearc/conform.nvim",
     opts = {
@@ -9,8 +9,13 @@ return {
         javascript = { "prettier" },
         typescript = { "prettier" },
         json = { "prettier" },
+        cpp = { "clang-format" },
+        c = { "clang-format" },
       },
     },
-    ft = { "html", "css", "scss", "javascript", "typescript", "json" },
+    ft = { "html", "css", "scss", "javascript", "typescript", "json", "c", "cpp" },
   },
 }
+
+vim.api.nvim_set_keymap("n", "<leader>f", ":ConformFormat<CR>", { noremap = true, silent = true })
+return M

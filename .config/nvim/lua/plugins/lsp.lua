@@ -106,6 +106,9 @@ return {
             less = { validate = true, lint = { unknownAtRules = "ignore" } },
           },
         },
+
+        -- CPP
+        clangd = {},
       },
     },
   },
