@@ -15,6 +15,7 @@ return {
         "vue",
         "c",
         "cpp",
+        "sql",
       },
       highlight = { enable = true },
       indent = { enable = true },

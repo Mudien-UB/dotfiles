@@ -11,9 +11,10 @@ local M = {
         json = { "prettier" },
         cpp = { "clang-format" },
         c = { "clang-format" },
+        sql = { "sqlfluff" },
       },
     },
-    ft = { "html", "css", "scss", "javascript", "typescript", "json", "c", "cpp" },
+    ft = { "html", "css", "scss", "javascript", "typescript", "json", "cpp", "c", "sql" },
   },
 }
 
