@@ -1,4 +1,4 @@
-oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\amro.omp.json" | Invoke-Expression
+oh-my-posh init pwsh --config "$PROFILE/../custom-theme.omp.json" | Invoke-Expression
 
 Import-Module Terminal-Icons
 
@@ -60,3 +60,26 @@ function grep { param($pattern, $file) Select-String -Pattern $pattern -Path $fi
 function coding { param($path) Set-Location "D:\coding\$path" }
 function kuliah { param($path) Set-Location "D:\kuliah\$path" }
 function d { Set-Location "D:\" }
+
+
+
+# # === WELCOME BANNER ===
+# $user = $env:USERNAME
+# $time = Get-Date -Format 'HH:mm'
+
+# $line1 = "$user…!"
+# $line2 = " $time "
+
+# $max = ($line1.Length, $line2.Length | Measure-Object -Maximum).Maximum
+# $top    = "╭" + ("─" * ($max + 2)) + "╮"
+# $bottom = "╰" + ("─" * ($max + 2)) + "╯"
+
+# $borderColor = "Magenta"
+# $textColor = "DarkMagenta"
+
+
+# Write-Host "  $top" -ForegroundColor $borderColor
+# Write-Host ("  │ " + $line1.PadRight($max) + " │") -ForegroundColor $textColor
+# Write-Host ("  │ " + $line2.PadRight($max) + " │") -ForegroundColor $textColor
+# Write-Host "  $bottom" -ForegroundColor $borderColor
+
