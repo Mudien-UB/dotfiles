@@ -1,33 +1,33 @@
 local opt = vim.opt
 
--- line numbers
+-- UI
 opt.number = true
 opt.relativenumber = true
+opt.cursorline = true
+opt.termguicolors = true
+opt.signcolumn = "yes"
+opt.showmode = false
 
--- tab & indent
+-- Tabs / indent
 opt.tabstop = 2
 opt.shiftwidth = 2
 opt.expandtab = true
 opt.smartindent = true
 
--- UI
-opt.cursorline = true
-opt.termguicolors = true
-opt.signcolumn = "yes"
-
--- search
+-- Search
 opt.ignorecase = true
 opt.smartcase = true
 
--- scrolling
+-- UX
 opt.scrolloff = 8
-
--- clipboard
 opt.clipboard = "unnamedplus"
+opt.updatetime = 200
+opt.timeoutlen = 300
 
--- split behavior
+-- Splits
 opt.splitright = true
 opt.splitbelow = true
 
--- undo history
+-- Buffer / undo
+opt.hidden = true
 opt.undofile = true

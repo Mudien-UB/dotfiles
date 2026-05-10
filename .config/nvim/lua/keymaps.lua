@@ -1,52 +1,55 @@
 local map = vim.keymap.set
+
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
--- save / quit / misc
-map("n", "<leader>w", ":w<CR>",          { desc = "Save" })
-map("n", "<leader>q", ":q<CR>",          { desc = "Quit" })
-map("n", "<leader>h", ":nohlsearch<CR>", { desc = "Clear highlight" })
+-- Basic
+map("n", "<leader>w", "<cmd>w<CR>", { desc = "Save" })
+map("n", "<leader>q", "<cmd>q<CR>", { desc = "Quit" })
+map("n", "<leader>h", "<cmd>nohlsearch<CR>", { desc = "Clear highlight" })
 
--- window navigation
-map("n", "<C-h>", "<C-w>h")
-map("n", "<C-j>", "<C-w>j")
-map("n", "<C-k>", "<C-w>k")
-map("n", "<C-l>", "<C-w>l")
+-- Window navigation
+map("n", "<C-h>", "<C-w>h", { desc = "Window left" })
+map("n", "<C-j>", "<C-w>j", { desc = "Window down" })
+map("n", "<C-k>", "<C-w>k", { desc = "Window up" })
+map("n", "<C-l>", "<C-w>l", { desc = "Window right" })
+map("n", "<C-Up>", "<cmd>resize +2<CR>", { desc = "Resize up" })
+map("n", "<C-Down>", "<cmd>resize -2<CR>", { desc = "Resize down" })
+map("n", "<C-Left>", "<cmd>vertical resize -2<CR>", { desc = "Resize left" })
+map("n", "<C-Right>", "<cmd>vertical resize +2<CR>", { desc = "Resize right" })
 
--- resize window
-map("n", "<C-Up>",    ":resize +2<CR>")
-map("n", "<C-Down>",  ":resize -2<CR>")
-map("n", "<C-Left>",  ":vertical resize -2<CR>")
-map("n", "<C-Right>", ":vertical resize +2<CR>")
+-- Escape
+map("i", "jk", "<Esc>", { desc = "Escape" })
 
--- esc
-map("i", "ii", "<Esc>")
+-- Neo-tree
+map("n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "Explorer toggle" })
+map("n", "<leader>o", "<cmd>Neotree focus<CR>", { desc = "Explorer focus" })
 
--- LSP
+-- Buffers
+map("n", "[b", "<cmd>BufferLineCycleNext<CR>", { desc = "Next buffer" })
+map("n", "]b", "<cmd>BufferLineCyclePrev<CR>", { desc = "Prev buffer" })
+map("n", "<leader>bp", "<cmd>BufferLinePick<CR>", { desc = "Pick buffer" })
+map("n", "<leader>bP", "<cmd>BufferLineTogglePin<CR>", { desc = "Pin buffer" })
+map("n", "<leader>bc", "<cmd>BufferLinePickClose<CR>", { desc = "Close buffer" })
+map("n", "<leader>bd", "<cmd>Bdelete<CR>", { desc = "Delete buffer" })
+map("n", "<leader>bD", "<Cmd>bdelete!<CR>", { desc = "Delete buffer force" })
+
+-- LSP (di-attach saat LSP aktif)
 vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(event)
-    local opts = function(desc) return { buffer = event.buf, desc = desc } end
-    map("n", "gd",         vim.lsp.buf.definition,     opts("Go to definition"))
-    map("n", "gD",         vim.lsp.buf.declaration,    opts("Go to declaration"))
-    map("n", "gr",         vim.lsp.buf.references,     opts("References"))
-    map("n", "gi",         vim.lsp.buf.implementation, opts("Go to implementation"))
-    map("n", "K",          vim.lsp.buf.hover,          opts("Hover docs"))
-    map("n", "<leader>lr", vim.lsp.buf.rename,         opts("Rename"))
-    map("n", "<leader>la", vim.lsp.buf.code_action,    opts("Code action"))
-    map("n", "<leader>lf", function()
-      require("conform").format({ async = true, lsp_fallback = true })
-    end,                                               opts("Format file"))
-    map("n", "<leader>ld", vim.diagnostic.open_float,  opts("Diagnostic detail"))
-    map("n", "[d",         vim.diagnostic.goto_prev,   opts("Prev diagnostic"))
-    map("n", "]d",         vim.diagnostic.goto_next,   opts("Next diagnostic"))
-  end
+	callback = function(event)
+		local opts = { buffer = event.buf }
+		map("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
+		map("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", opts, { desc = "Go to declaration" }))
+		map("n", "gr", vim.lsp.buf.references, vim.tbl_extend("force", opts, { desc = "References" }))
+		map("n", "gi", vim.lsp.buf.implementation, vim.tbl_extend("force", opts, { desc = "Implementation" }))
+		map("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "Hover docs" }))
+		map("n", "<leader>lr", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename" }))
+		map("n", "<leader>la", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "Code action" }))
+		map("n", "<leader>lf", function()
+			require("conform").format({ async = true, lsp_fallback = true })
+		end, vim.tbl_extend("force", opts, { desc = "Format" }))
+		map("n", "<leader>ld", vim.diagnostic.open_float, vim.tbl_extend("force", opts, { desc = "Diagnostics float" }))
+		map("n", "[d", vim.diagnostic.goto_prev, vim.tbl_extend("force", opts, { desc = "Prev diagnostic" }))
+		map("n", "]d", vim.diagnostic.goto_next, vim.tbl_extend("force", opts, { desc = "Next diagnostic" }))
+	end,
 })
-
--- File explorer
-map("n", "<leader>e", ":Neotree toggle<CR>", { desc = "Explorer toggle" })
-map("n", "<leader>o", ":Neotree focus<CR>",  { desc = "Explorer focus" })
-
--- FZF
-map("n", "<leader>ff", ":Files<CR>",   { desc = "Files" })
-map("n", "<leader>fg", ":Rg<CR>",      { desc = "Grep" })
-map("n", "<leader>fb", ":Buffers<CR>", { desc = "Buffers" })
-map("n", "<leader>fh", ":History<CR>", { desc = "History" })
