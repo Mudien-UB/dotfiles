@@ -50,6 +50,10 @@ Set-PsFzfOption `
     }
 
 # === Alias ===
+
+Set-Alias -Name st -Value "C:\Users\user\scripts\shutdown_timer.bat"
+Set-Alias -Name stimer -Value "C:\Users\user\scripts\shutdown_timer.bat"
+
 function ll { Get-ChildItem | Format-Table Name, Length, LastWriteTime }
 function la { Get-ChildItem -Force | Format-Table Name, Length, LastWriteTime }
 function mkcd { param($folderName) New-Item -ItemType Directory -Name $folderName; Set-Location $folderName }
@@ -59,27 +63,28 @@ function ... { Set-Location ../.. }
 function grep { param($pattern, $file) Select-String -Pattern $pattern -Path $file }
 function coding { param($path) Set-Location "D:\coding\$path" }
 function kuliah { param($path) Set-Location "D:\kuliah\$path" }
+function kerja { param($path) Set-Location "D:\KERJA\$path" }
 function d { Set-Location "D:\" }
 
-
+function vi { param($path) nvim $path }
 
 # # === WELCOME BANNER ===
-# $user = $env:USERNAME
-# $time = Get-Date -Format 'HH:mm'
+$user = $env:USERNAME
+$time = Get-Date -Format 'HH:mm'
 
-# $line1 = "$user…!"
-# $line2 = " $time "
+$line1 = "$user…!"
+$line2 = " $time "
 
-# $max = ($line1.Length, $line2.Length | Measure-Object -Maximum).Maximum
-# $top    = "╭" + ("─" * ($max + 2)) + "╮"
-# $bottom = "╰" + ("─" * ($max + 2)) + "╯"
+$max = ($line1.Length, $line2.Length | Measure-Object -Maximum).Maximum
+$top    = "╭" + ("─" * ($max + 2)) + "╮"
+$bottom = "╰" + ("─" * ($max + 2)) + "╯"
 
-# $borderColor = "Magenta"
-# $textColor = "DarkMagenta"
+$borderColor = "Magenta"
+$textColor = "DarkMagenta"
 
 
-# Write-Host "  $top" -ForegroundColor $borderColor
-# Write-Host ("  │ " + $line1.PadRight($max) + " │") -ForegroundColor $textColor
-# Write-Host ("  │ " + $line2.PadRight($max) + " │") -ForegroundColor $textColor
-# Write-Host "  $bottom" -ForegroundColor $borderColor
-
+Write-Host "$top" -ForegroundColor $borderColor
+Write-Host ("│ " + $line1.PadRight($max) + " │") -ForegroundColor $textColor
+Write-Host ("│ " + $line2.PadRight($max) + " │") -ForegroundColor $textColor
+Write-Host "$bottom" -ForegroundColor $borderColor
+#

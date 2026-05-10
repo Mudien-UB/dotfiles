@@ -45,7 +45,7 @@
 
 ### Features
 
-- [**Oh My Posh**](https://ohmyposh.dev/) - Theme (amro)
+- [**Oh My Posh**](https://ohmyposh.dev/)
 - [**Terminal Icons**](https://github.com/devblackops/Terminal-Icons) for better visuals
 - [**PSFzf**](https://github.com/kelleyma49/PSFzf) fuzzy finder integration
 
