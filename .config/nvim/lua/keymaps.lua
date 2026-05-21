@@ -18,9 +18,6 @@ map("n", "<C-Down>", "<cmd>resize -2<CR>", { desc = "Resize down" })
 map("n", "<C-Left>", "<cmd>vertical resize -2<CR>", { desc = "Resize left" })
 map("n", "<C-Right>", "<cmd>vertical resize +2<CR>", { desc = "Resize right" })
 
--- Escape
-map("i", "jk", "<Esc>", { desc = "Escape" })
-
 -- Neo-tree
 map("n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "Explorer toggle" })
 map("n", "<leader>o", "<cmd>Neotree focus<CR>", { desc = "Explorer focus" })

@@ -17,6 +17,14 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		lazy = false,
 		build = ":TSUpdate",
+		config = function()
+			require("nvim-treesitter").setup({
+				auto_install = true,
+				highlight = {
+					enable = true,
+				},
+			})
+		end,
 	},
 
 	-- Autotag
@@ -68,6 +76,32 @@ return {
 			{ "<leader>fg", "<cmd>FzfLua live_grep<CR>", desc = "Live grep" },
 			{ "<leader>fb", "<cmd>FzfLua buffers<CR>", desc = "Find buffers" },
 			{ "<leader>fh", "<cmd>FzfLua help_tags<CR>", desc = "Help tags" },
+		},
+	},
+	-- Git diff
+	{
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup()
+
+			vim.keymap.set("n", "<leader>hp", "<cmd>Gitsigns preview_hunk<CR>")
+			vim.keymap.set("n", "<leader>hs", "<cmd>Gitsigns stage_hunk<CR>")
+			vim.keymap.set("n", "<leader>hr", "<cmd>Gitsigns reset_hunk<CR>")
+		end,
+	},
+	{
+		"kdheepak/lazygit.nvim",
+		cmd = {
+			"LazyGit",
+			"LazyGitConfig",
+			"LazyGitCurrentFile",
+			"LazyGitFilter",
+		},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		keys = {
+			{ "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
 		},
 	},
 }

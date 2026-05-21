@@ -17,7 +17,6 @@ return {
 		config = function()
 			local lspconfig = require("lspconfig")
 
-			-- Capabilities dari nvim-cmp (penting untuk completion)
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			local servers = {
@@ -40,12 +39,10 @@ return {
 			require("mason-lspconfig").setup({
 				ensure_installed = servers,
 				handlers = {
-					-- Handler default: setup semua server dengan capabilities
 					function(server_name)
 						lspconfig[server_name].setup({ capabilities = capabilities })
 					end,
 
-					-- Override khusus untuk lua_ls (supaya ngerti config Neovim)
 					["lua_ls"] = function()
 						lspconfig.lua_ls.setup({
 							capabilities = capabilities,
@@ -85,7 +82,6 @@ return {
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
-					-- Tab/S-Tab ditangani di keymaps.lua tidak perlu duplikasi di sini
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
@@ -130,5 +126,15 @@ return {
 				},
 			})
 		end,
+	},
+	{
+		"ray-x/lsp_signature.nvim",
+		event = "InsertEnter",
+		opts = {
+			bind = true,
+			handler_opts = {
+				border = "rounded",
+			},
+		},
 	},
 }
