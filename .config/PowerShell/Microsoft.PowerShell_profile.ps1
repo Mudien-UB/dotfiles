@@ -49,8 +49,35 @@ Set-PsFzfOption `
       Write-Host "Copied file path to clipboard: $item"
     }
 
+function livegrep {
+    $selected = fzf `
+        --ansi `
+        --disabled `
+        --bind "change:reload:rg --line-number --smart-case {q}" `
+        --delimiter ":" `
+        --preview "bat --style=numbers --color=always {1} --highlight-line {2}"
+
+    if ($selected) {
+        $parts = $selected -split ':'
+        nvim "+$($parts[1])" $parts[0]
+    }
+}
+function frg {
+    $selected = rg --line-number --hidden --glob '!node_modules' . |
+        fzf `
+            --delimiter ":" `
+            --preview "bat --style=numbers --color=always {1} --highlight-line {2}"
+
+    if ($selected -match '^(.*?):(\d+):') {
+        $file = $matches[1]
+        $line = $matches[2]
+
+        nvim "+$line" $file
+    }
+}
 # === Alias ===
 
+Set-Alias mdview glow;
 Set-Alias -Name st -Value "C:\Users\user\scripts\shutdown_timer.bat"
 Set-Alias -Name stimer -Value "C:\Users\user\scripts\shutdown_timer.bat"
 
@@ -88,3 +115,8 @@ Write-Host ("│ " + $line1.PadRight($max) + " │") -ForegroundColor $textColor
 Write-Host ("│ " + $line2.PadRight($max) + " │") -ForegroundColor $textColor
 Write-Host "$bottom" -ForegroundColor $borderColor
 #
+
+#f45873b3-b655-43a6-b217-97c00aa0db58 PowerToys CommandNotFound module
+
+Import-Module -Name Microsoft.WinGet.CommandNotFound
+#f45873b3-b655-43a6-b217-97c00aa0db58
